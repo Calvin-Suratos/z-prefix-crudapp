@@ -14,7 +14,7 @@ const CreateAccount = () => {
           <div><input type="text" placeholder="Username"/></div>
           <div><input type="text" placeholder="Password"/></div>
           <div>______________</div>
-          <button onClick={() => nav('/homepage')}>Create Account</button>
+          <button onClick={() => nav('/homepage')}>Submit</button>
         </label>
       </fieldset>
     </>

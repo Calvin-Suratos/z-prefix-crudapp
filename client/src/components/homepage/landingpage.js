@@ -1,21 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import LandingPage from './landingpage';
-import userContext from '../../utils/userContext';
+import React, { useState, useEffect} from 'react';
 
 
-const HomePage = () => {
+const LandingPage = ({name}) => {
   const [results, setResults] = useState([])
   const [posts, setPosts] = useState([])
-  const {firstname} = useContext(userContext);
-  const params = useParams();
 
   useEffect(() => {
-    fetch('http://localhost:8080/users/' + params.name.split('-')[0])
+    fetch('http://localhost:8080/users')
     .then(res => res.json())
     .then(data => setResults(data))
     .catch(err => console.error(err))
-  }, [params.name])
+  }, [])
 
   useEffect(() => {
     fetch('http://localhost:8080/posts')
@@ -27,13 +22,11 @@ const HomePage = () => {
 
   return (
     <>
-      {results.map(user => 
+      <h1>YOUR FEED</h1>
+      {results.map(user => user.first_name === name ? null :
         <div key={user.id}>
-          <h1>{user.first_name} {user.last_name}</h1>
-          <h3>WELCOME TO THE HOMEPAGE</h3>
-
           <fieldset>
-            <legend>YOUR POSTS</legend>
+            <legend>{user.first_name} {user.last_name}</legend>
             {posts.map(post => 
               user.id === post.users_id ?                    
               <fieldset key={post.id}>
@@ -45,10 +38,8 @@ const HomePage = () => {
           </fieldset>          
         </div>
       )}
-
-      <LandingPage name={params.name.split('-')[0]}/>
     </>
   )
 }
 
-export default HomePage;
+export default LandingPage;
