@@ -17,6 +17,15 @@ app.get('/users', (req, res) => {
     .catch(() => res.status(404).send('Could not retrieve data'))
 })
 
+app.get('/users/:name', (req, res) => {
+  knex 
+    .select('*')
+    .from('users')
+    .where('first_name', req.params.name)
+    .then(data => res.status(200).json(data))
+    .catch(() => res.status(404).send('Could not retrieve data'))
+})
+
 app.get('/posts', (req, res) => {
   knex 
     .select('*')
