@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.string('last_name', 500).notNullable();
     table.string('username', 500).notNullable();
     table.string('password', 500).notNullable();
+    table.string('salt', 500).notNullable();
   })
 };
 

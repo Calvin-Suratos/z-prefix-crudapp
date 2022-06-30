@@ -9,38 +9,36 @@ const LoginPage = () => {
   const [searchUsername, setSearchUsername] = useState({username: ''})
   const [searchPassword, setSearchPassword] = useState({password: ''})
 
-  useEffect(() => {
-    fetch('http://localhost:8080/users')
-    .then(res => res.json())
-    .then(data => setUsers(data))
-    .catch(err => console.error(err))
-  }, [])
-
-
+  
+  
   const searchHandlerUsername = (e) => {
     setSearchUsername(e.target.value);
   };
-
+  
   const searchHandlerPassword = (e) => {
     setSearchPassword(e.target.value);
   };
-
-
+  
+  
   let checkProfile = () => {
-    let count = 0;
-    users.map(user => {
-      if (searchUsername === user.username && searchPassword === user.password) {
-        setFirstName(user.first_name);
-        return nav(`/${user.first_name}-${user.last_name}`);
-      }    
-      else {
-        return count++;
-      }
-    })
-
-    if (count === users.length) {
-      alert ('Incorrect username or password. Please try again.')
+    const init = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        username: searchUsername,
+        password: searchPassword,
+      })
     }
+    
+    fetch('http://localhost:8080/login', init)
+    .then(res => res.json())
+    .then(user => {
+      console.log(user)
+      nav(`/${user.first_name}-${user.last_name}`)
+    })
+    .catch(err => console.error(err))
   }
 
 
