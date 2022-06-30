@@ -31,7 +31,7 @@ const Feeds = ({name}) => {
               user.id === post.users_id ?                    
               <fieldset key={post.id}>
                 <legend>{post.title}</legend>
-                <div>{post.content}</div>
+                {post.content.length > 100 ? <div>{post.content.substring(0,100)}...</div>:<div>{post.content}</div>}
               </fieldset>
               : null                
             )}
