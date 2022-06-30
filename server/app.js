@@ -125,5 +125,14 @@ app.post('/newpost', async (req, res) => {
   }
 });
 
+// Delete ---------------------------------
+app.delete('/posts/:id', async (req, res) => {
+  await knex('posts')
+    .del()
+    .where({id: req.params.id})
+
+  res.status(200).send({message: 'Post has been deleted.'});
+})
+
 
 module.exports = app;
