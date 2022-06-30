@@ -8,9 +8,7 @@ const SeePost = () => {
   const {lastName} = useContext(lastContext)
   const params = useParams();
   const nav = useNavigate();
-
-  console.log(firstName)
-  console.log(lastName)
+  
 
   useEffect(() => {
     fetch(`http://localhost:8080/posts/${params.post}`)

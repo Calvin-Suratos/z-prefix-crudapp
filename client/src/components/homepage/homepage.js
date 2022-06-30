@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {firstContext, lastContext} from '../../utils/userContext';
+import EditPost from '../editpost/editpost';
 import Feeds from '../feeds/feeds';
 
 
@@ -63,13 +64,13 @@ const HomePage = () => {
           <button onClick={() => nav(`/${user.first_name}-${user.last_name}/newpost`)}>New Post</button>
           {posts.map(post => 
             user.id === post.users_id ?                    
-            <fieldset key={post.title}>
-              <legend>{post.title}</legend>
-              {post.content.length > 100 ? <div>{post.content.substring(0,100)}...</div>:<div>{post.content}</div>}
-              <button onClick={() => nav(`/${user.first_name}-${user.last_name}/${post.id}`)}>See more</button>
-              <h6>Created on: {today}</h6>
-              <button onClick={() => deletePost(post.id)}>X</button>
-            </fieldset>
+              <fieldset key={post.title}>
+                <legend>{post.title}</legend>
+                <EditPost post={post}/>
+                <button onClick={() => nav(`/${user.first_name}-${user.last_name}/${post.id}`)}>See more</button>
+                <h6>Created on: {today}</h6>
+                <button onClick={() => deletePost(post.id)}>X</button>
+              </fieldset>                       
             : null              
           )}
         </fieldset>          
