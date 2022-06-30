@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, /*useEffect, useContext*/ } from "react";
 import { useNavigate } from "react-router-dom";
-import userContext from "../../utils/userContext";
+// import userContext from "../../utils/userContext";
 
 const LoginPage = () => {
   const nav = useNavigate();
-  const [users, setUsers] = useState([])
-  const {setFirstName} = useContext(userContext);
-  const [searchUsername, setSearchUsername] = useState({username: ''})
-  const [searchPassword, setSearchPassword] = useState({password: ''})
+  // const [users, setUsers] = useState([])
+  // const {setFirstName} = useContext(userContext);
+  const [searchUsername, setSearchUsername] = useState({searchUsername: ''})
+  const [searchPassword, setSearchPassword] = useState({searchPassword: ''})
 
-  
-  
+    
   const searchHandlerUsername = (e) => {
     setSearchUsername(e.target.value);
   };

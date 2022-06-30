@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, /*useContext*/ } from 'react';
 import { useParams } from 'react-router-dom';
 import LandingPage from './landingpage';
-import userContext from '../../utils/userContext';
+// import userContext from '../../utils/userContext';
 
 
 const HomePage = () => {
   const [results, setResults] = useState([])
   const [posts, setPosts] = useState([])
-  const {firstname} = useContext(userContext);
+  // const {firstname} = useContext(userContext);
   const params = useParams();
 
   useEffect(() => {
