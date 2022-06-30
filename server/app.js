@@ -134,6 +134,14 @@ app.post('/newpost', async (req, res) => {
   }
 });
 
+// Update ---------------------------------
+app.patch('/posts/:id', async (req, res) => {
+  await knex('posts')
+    .update(req.body)
+    .where({id: req.params.id})
+  res.status(200).send({message: 'updated'});
+})
+
 // Delete ---------------------------------
 app.delete('/posts/:id', async (req, res) => {
   await knex('posts')
