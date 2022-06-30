@@ -20,6 +20,24 @@ app.get('/users', (req, res) => {
     .catch(err => console.error(err))
 })
 
+app.get('/users/:name', (req, res) => {
+  knex 
+    .select('*')
+    .from('users')
+    .where('first_name', req.params.name)
+    .then(data => res.status(200).json(data))
+    .catch(() => res.status(404).send('Could not retrieve data'))
+})
+
+app.get('/posts', (req, res) => {
+  knex 
+    .select('*')
+    .from('posts')
+    .then(data => res.status(200).json(data))
+    .catch(() => res.status(404).send('Could not retrieve data'))
+})
+
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const salt = await knex
@@ -50,23 +68,6 @@ app.post('/login', async (req, res) => {
   }
 })
 
-app.get('/users/:name', (req, res) => {
-  knex 
-    .select('*')
-    .from('users')
-    .where('first_name', req.params.name)
-    .then(data => res.status(200).json(data))
-    .catch(() => res.status(404).send('Could not retrieve data'))
-})
-
-app.get('/posts', (req, res) => {
-  knex 
-    .select('*')
-    .from('posts')
-    .then(data => res.status(200).json(data))
-    .catch(() => res.status(404).send('Could not retrieve data'))
-})
-
 app.post('/createaccount', async (req, res) => {
   const { first_name, last_name, username, password } = req.body;
   const salt = bcrypt.genSaltSync(saltRounds);
@@ -94,6 +95,35 @@ app.post('/createaccount', async (req, res) => {
   }
 });
 
-app.post('/login')
+app.post('/newpost', async (req, res) => {
+  const { title, content, firstname } = req.body;
+  // console.log('first', firstname)
+
+  let usersid = await knex('users')
+    .select('id')
+    .where({first_name: firstname})
+
+  // console.log(usersid[0].id)
+
+  try {await knex('posts')
+    .insert({
+      users_id: usersid[0].id,
+      title: title,
+      content: content,
+    })
+
+    let name = await knex
+    .select('first_name', 'last_name')
+    .from('users')
+    .where({first_name: firstname})
+
+  res.status(201).json(name[0])}
+
+  catch (err) {
+    res.status(500).send()
+    console.error(err)
+  }
+});
+
 
 module.exports = app;

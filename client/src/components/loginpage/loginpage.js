@@ -33,10 +33,7 @@ const LoginPage = () => {
     
     fetch('http://localhost:8080/login', init)
     .then(res => res.json())
-    .then(user => {
-      console.log(user)
-      nav(`/${user.first_name}-${user.last_name}`)
-    })
+    .then(user => {nav(`/${user.first_name}-${user.last_name}`)})
     .catch(err => console.error(err))
   }
 

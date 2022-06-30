@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 
 
-const LandingPage = ({name}) => {
+const Feeds = ({name}) => {
   const [results, setResults] = useState([])
   const [posts, setPosts] = useState([])
 
@@ -42,4 +42,4 @@ const LandingPage = ({name}) => {
   )
 }
 
-export default LandingPage;
+export default Feeds;
