@@ -1,5 +1,4 @@
 import React from "react";
 
-const userContext = React.createContext({firstname: '', setFirstName : () => {}})
-
-export default userContext;
+export const firstContext = React.createContext({firstName: '', setFirstName: () => {}})
+export const lastContext = React.createContext({lastName: '', setLastName: () => {}})

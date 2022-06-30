@@ -1,11 +1,8 @@
-import React, { useState, /*useEffect, useContext*/ } from "react";
+import React, { useState, /*useEffect,*/ } from "react";
 import { useNavigate } from "react-router-dom";
-// import userContext from "../../utils/userContext";
 
 const LoginPage = () => {
   const nav = useNavigate();
-  // const [users, setUsers] = useState([])
-  // const {setFirstName} = useContext(userContext);
   const [searchUsername, setSearchUsername] = useState({searchUsername: ''})
   const [searchPassword, setSearchPassword] = useState({searchPassword: ''})
 
@@ -33,7 +30,7 @@ const LoginPage = () => {
     
     fetch('http://localhost:8080/login', init)
     .then(res => res.json())
-    .then(user => {nav(`/${user.first_name}-${user.last_name}`)})
+    .then(user => nav(`/${user.first_name}-${user.last_name}`))
     .catch(err => console.error(err))
   }
 

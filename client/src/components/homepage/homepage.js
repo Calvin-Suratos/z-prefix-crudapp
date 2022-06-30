@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {firstContext, lastContext} from '../../utils/userContext';
 import Feeds from '../feeds/feeds';
 
 
 const HomePage = () => {
   const [results, setResults] = useState([{id: 1, first_name: '', last_name: '', username: '', password: '', salt: ''}])
-  const [posts, setPosts] = useState([{users_id: 5, title: '', content: ''}])
+  const [posts, setPosts] = useState([{users_id: 1, title: '', content: ''}])
+  const {setFirstName} = useContext(firstContext)
+  const {setLastName} = useContext(lastContext)
+  let today = new Date().toLocaleString()
   const params = useParams();
   const nav = useNavigate();
-  let today = new Date().toLocaleString()
 
   useEffect(() => {
     fetch('http://localhost:8080/users/' + params.name.split('-')[0])
@@ -46,8 +49,11 @@ const HomePage = () => {
   }
 
   let user = results[0]
+  
   return (
     <>
+      {setFirstName(user.first_name)}
+      {setLastName(user.last_name)}
       <button onClick={() => nav('/')}>Logout</button>
       <div key={user.id}>
         <h1>{user.first_name} {user.last_name}</h1>
@@ -60,6 +66,7 @@ const HomePage = () => {
             <fieldset key={post.title}>
               <legend>{post.title}</legend>
               {post.content.length > 100 ? <div>{post.content.substring(0,100)}...</div>:<div>{post.content}</div>}
+              <button onClick={() => nav(`/${user.first_name}-${user.last_name}/${post.id}`)}>See more</button>
               <h6>Created on: {today}</h6>
               <button onClick={() => deletePost(post.id)}>X</button>
             </fieldset>
@@ -68,7 +75,7 @@ const HomePage = () => {
         </fieldset>          
       </div>
 
-      <Feeds name={params.name.split('-')[0]}/>
+      <Feeds name={params.name}/>
     </>
   )
 }

@@ -37,6 +37,15 @@ app.get('/posts', (req, res) => {
     .catch(() => res.status(404).send('Could not retrieve data'))
 })
 
+app.get('/posts/:id', (req, res) => {
+  knex 
+    .select('*')
+    .from('posts')
+    .where('id', req.params.id)
+    .then(data => res.status(200).json(data))
+    .catch(() => res.status(404).send('Could not retrieve data'))
+})
+
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
