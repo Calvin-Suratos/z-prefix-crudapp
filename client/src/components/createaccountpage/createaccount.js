@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Fieldbox, Inputbox, Legend, Submitbox } from "./stylecreateacount";
 
 const CreateAccount = () => {
   const nav = useNavigate();
@@ -49,17 +50,17 @@ const CreateAccount = () => {
 
   return (
     <>
-      <fieldset>
-        <legend>CREATE ACCOUNT</legend>
+        <Legend>CREATE ACCOUNT</Legend>
+      <Fieldbox>
         <label>
-          <div><input type="text" placeholder="First Name" onKeyUp={(e) => searchHandlerFirstName(e)}/></div>
-          <div><input type="text" placeholder="Last Name" onKeyUp={(e) => searchHandlerLastName(e)}/></div>
-          <div><input type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
-          <div><input type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
+          <div><Inputbox type="text" placeholder="First Name" onKeyUp={(e) => searchHandlerFirstName(e)}/></div>
+          <div><Inputbox type="text" placeholder="Last Name" onKeyUp={(e) => searchHandlerLastName(e)}/></div>
+          <div><Inputbox type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
+          <div><Inputbox type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
           <div>______________</div>
-          <button onClick={() => createProfile()}>Submit</button>
+          <Submitbox onClick={() => createProfile()}>Submit</Submitbox>
         </label>
-      </fieldset>
+      </Fieldbox>
     </>
   )
 }

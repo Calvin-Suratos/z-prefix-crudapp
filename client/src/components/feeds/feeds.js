@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Fieldbox, GridDiv, HeaderOne, Legendbox } from './stylefeeds';
 
 
 const Feeds = ({name}) => {
@@ -24,22 +25,22 @@ const Feeds = ({name}) => {
 
   return (
     <>
-      <h1>YOUR FEED</h1>
+      <HeaderOne>FEEDS</HeaderOne>
       {results.map(user => user.first_name === name.split('-')[0] ? null :
-        <div key={user.id}>
-          <fieldset>
-            <legend>{user.first_name} {user.last_name}</legend>
-            {posts.map(post => 
+        <GridDiv key={user.id}>
+          <Fieldbox>
+            <Legendbox style={{'textAlign': 'center'}}>{user.first_name} {user.last_name}</Legendbox>
+            {posts.map((post) => 
               user.id === post.users_id ?                    
-              <fieldset key={post.id}>
-                <legend>{post.title}</legend>
+              <Fieldbox key={post.id}>
+                <Legendbox>Post: {post.title}</Legendbox>
                 {post.content.length > 100 ? <div>{post.content.substring(0,100)}...</div>:<div>{post.content}</div>}
                 <button onClick={() => nav(`/${user.first_name}-${user.last_name}/${post.id}`)}>See more</button>
-              </fieldset>
+              </Fieldbox>
               : null                
             )}
-          </fieldset>          
-        </div>
+          </Fieldbox>          
+        </GridDiv>
       )}
     </>
   )

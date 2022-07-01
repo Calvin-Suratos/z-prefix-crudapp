@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Fieldbox, HeaderOne, Legendbox } from "./stylenewpost";
 
 const NewPost = () => {
 
@@ -38,13 +39,13 @@ const NewPost = () => {
 
   return(
     <>
-      <h1>New Post</h1>
-      <fieldset>
-        <legend>Title</legend>
+      <HeaderOne>New Post</HeaderOne>
+      <Fieldbox>
+        <Legendbox>Add New:</Legendbox>
         <div><input type='text' placeholder="Title" onKeyUp={(e) => TitleHandler(e)}/></div>
         <textarea rows='4' cols='50' placeholder="Insert Blog Here" onKeyUp={(e) => ContentHandler(e)}></textarea>
         <div><button onClick={() => newPost()}>Submit</button></div>
-      </fieldset>
+      </Fieldbox>
     </>
   )
 }

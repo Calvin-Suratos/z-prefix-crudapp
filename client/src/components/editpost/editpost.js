@@ -32,11 +32,6 @@ const EditPost = ({post}) => {
   }
 
   return (
-    // <div>      
-    //   {post.content.length > 100 ? 
-    //   <div><div contentEditable="true" onInput={() => editPost(post)}>{isEditable ? post.content : post.content.substring(0,100)}</div><span>...</span></div>
-    //     :<div contentEditable="true" onInput={(e) => editPost(e)}>{post.content}</div>}
-    // </div>
     <div>      
       {post.content.length > 100 ? 
         <>
@@ -80,6 +75,13 @@ const EditPost = ({post}) => {
 }
 
 export default EditPost;
+
+// <div>      
+//   {post.content.length > 100 ? 
+//   <div><div contentEditable="true" onInput={() => editPost(post)}>{isEditable ? post.content : post.content.substring(0,100)}</div><span>...</span></div>
+//     :<div contentEditable="true" onInput={(e) => editPost(e)}>{post.content}</div>}
+// </div>
+
 
 // function Tasks ({item}) {
 //   return(

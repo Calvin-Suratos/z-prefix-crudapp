@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {firstContext, lastContext} from '../../utils/userContext';
 import EditPost from '../editpost/editpost';
 import Feeds from '../feeds/feeds';
+import { Fieldbox, HeaderOne, Legendbox, Logout } from './stylehomepage';
 
 
 const HomePage = () => {
@@ -55,25 +56,24 @@ const HomePage = () => {
     <>
       {setFirstName(user.first_name)}
       {setLastName(user.last_name)}
-      <button onClick={() => nav('/')}>Logout</button>
+      <Logout onClick={() => nav('/')}>Logout</Logout>
       <div key={user.id}>
-        <h1>{user.first_name} {user.last_name}</h1>
-        <h3>WELCOME TO THE HOMEPAGE</h3>
-        <fieldset>
-          <legend>YOUR POSTS</legend>
+        <HeaderOne>{user.first_name.toUpperCase()} {user.last_name.toUpperCase()}</HeaderOne>
+        <Fieldbox>
+          <Legendbox style={{'textAlign': 'center'}}>YOUR POSTS</Legendbox>
           <button onClick={() => nav(`/${user.first_name}-${user.last_name}/newpost`)}>New Post</button>
           {posts.map(post => 
             user.id === post.users_id ?                    
-              <fieldset key={post.title}>
-                <legend>{post.title}</legend>
+              <Fieldbox key={post.title}>
+                <Legendbox>{post.title}</Legendbox>
                 <EditPost post={post}/>
                 <button onClick={() => nav(`/${user.first_name}-${user.last_name}/${post.id}`)}>See more</button>
                 <h6>Created on: {today}</h6>
                 <button onClick={() => deletePost(post.id)}>X</button>
-              </fieldset>                       
+              </Fieldbox>                       
             : null              
           )}
-        </fieldset>          
+        </Fieldbox>          
       </div>
 
       <Feeds name={params.name}/>
