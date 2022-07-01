@@ -1,5 +1,6 @@
 import React, { useState, /*useEffect,*/ } from "react";
 import { useNavigate } from "react-router-dom";
+import { Createbox, Fieldbox, Headerbox, Inputbox, Legend, Submitbox } from "./styleloginpage";
 
 const LoginPage = () => {
   const nav = useNavigate();
@@ -37,16 +38,17 @@ const LoginPage = () => {
 
   return (
     <>
-      <fieldset>
-        <legend>LOGIN</legend>
+      <Headerbox>BLOG SPACE</Headerbox>
+      <Fieldbox>
+        <Legend>LOGIN</Legend>
         <label>
-          <div><input type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
-          <div><input type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
-          <div><input type="submit" value="Submit" onClick={() => checkProfile()}/></div>
+          <div><Inputbox type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
+          <div><Inputbox type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
+          <div><Submitbox type="submit" value="Submit" onClick={() => checkProfile()}/></div>
           <div>______________</div>
-          <button onClick={() => nav('/createaccount')}>Create Account</button>
+          <Createbox onClick={() => nav('/createaccount')}>Create Account</Createbox>
         </label>
-      </fieldset>
+      </Fieldbox>
     </>
   )
 }

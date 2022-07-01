@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #515867;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,14 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  background-image: url('../public/Wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #5784a0
+
 }
+
 
 /* .App-logo {
   height: 40vmin;
