@@ -49,31 +49,49 @@ app.get('/posts/:id', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const salt = await knex
-  .select('salt')
+
+  const check = await knex
+  .select('username')
   .from('users')
-  .where({username: username})
 
-  const hash = bcrypt.hashSync(password, salt[0].salt);
+  let count = 0;
 
-
-  let result = await knex 
-    .select('password')
-    .from('users')
-    .where({username: username})
-
-  const bool = bcrypt.compare(result[0].password, hash)
-
-  let name = await knex
-    .select('first_name', 'last_name')
-    .from('users')
-    .where({username: username})
-    
-  if (bool) {
-    res.status(200).json(name[0])
+  check.map(user => {
+    if (username !== user.username) {
+      count++;
+    }
+  })
+  
+  if(count === check.length) {
+    res.status(404).json({message: 'Could not retrieve data'})
   }
   else {
-    res.status(404).send('Could not retrieve data')
+    const salt = await knex
+    .select('salt')
+    .from('users')
+    .where({username: username})
+  
+    const hash = bcrypt.hashSync(password, salt[0].salt);
+  
+  
+    let result = await knex 
+      .select('password')
+      .from('users')
+      .where({username: username})
+  
+    const bool = bcrypt.compare(result[0].password, hash)
+
+    let name = await knex
+      .select('first_name', 'last_name')
+      .from('users')
+      .where({username: username})
+      
+    if (hash === result[0].password) {
+      res.status(200).json(name[0])
+    }
+    else {
+      res.status(404).json({message: 'Could not retrieve data'})
+    }
   }
 })
 
