@@ -43,7 +43,7 @@ const LoginPage = () => {
         <Legend>LOGIN</Legend>
         <label>
           <div><Inputbox type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
-          <div><Inputbox type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
+          <div><Inputbox type="password" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
           <div><Submitbox type="submit" value="Submit" onClick={() => checkProfile()}/></div>
           <div>______________</div>
           <Createbox onClick={() => nav('/createaccount')}>Create Account</Createbox>
