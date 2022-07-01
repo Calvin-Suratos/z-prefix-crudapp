@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const EditPost = ({post}) => {
   const [isEditable, setIsEditable] = useState(false)
+  const [editInput, setEditInput] = useState('')
 
   const editPost = (post) => {
     setIsEditable(!isEditable)
-
     const init = {
       method: 'PATCH',
       headers: {
@@ -14,7 +14,7 @@ const EditPost = ({post}) => {
       body: JSON.stringify(
         {
           "title": post.title,
-          "content": !post.content,
+          "content": editInput,
         } 
       )
     }
@@ -23,14 +23,58 @@ const EditPost = ({post}) => {
     .then(res => res.json())
     .then(data => {
       console.log(data);
+      window.location.reload(false);
     })
   }
 
+  const editHandler = (e) => {
+    setEditInput(e.target.value)
+  }
+
   return (
+    // <div>      
+    //   {post.content.length > 100 ? 
+    //   <div><div contentEditable="true" onInput={() => editPost(post)}>{isEditable ? post.content : post.content.substring(0,100)}</div><span>...</span></div>
+    //     :<div contentEditable="true" onInput={(e) => editPost(e)}>{post.content}</div>}
+    // </div>
     <div>      
       {post.content.length > 100 ? 
-      <div><div contentEditable="true" onInput={() => editPost(post)}>{isEditable ? post.content : post.content.substring(0,100)}</div><span>...</span></div>
-        :<div contentEditable="true" onInput={() => 'd' }>{post.content}</div>}
+        <>
+        {isEditable ? 
+          <>
+          <div><textarea rows='4' cols='50' onKeyUp={(e) => editHandler(e)} placeholder='Insert New Blog Here'/></div>
+          <div><button onClick={() => {
+            editPost(post)
+            
+            }
+            }>Submit</button></div>
+          </>
+        :
+          <>
+          <div>{post.content.substring(0,100)}...</div>
+          <div><button onClick={() => setIsEditable(!isEditable)}>Edit</button></div>
+          </>
+        }
+        </>
+      :
+        <>
+        {isEditable ? 
+          <>
+          <div><textarea rows='4' cols='50' onKeyUp={(e) => editHandler(e)} placeholder='Insert New Blog Here'/></div>
+          <div><button onClick={() => {
+            editPost(post)
+            
+            }
+            }>Submit</button></div>
+          </>
+        :
+          <>
+          <div>{post.content}</div>
+          <div><button onClick={() => setIsEditable(!isEditable)}>Edit</button></div>
+          </>
+        }
+        </>
+      }
     </div>
   )
 }
