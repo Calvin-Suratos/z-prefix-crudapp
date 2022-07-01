@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {firstContext, lastContext} from '../../utils/userContext';
+import { Fieldbox, HeaderOne, Legendbox } from './styleseepost';
 
 const SeePost = () => {
   const [posts, setPosts] = useState([{users_id: 1, title: '', content: ''}])
@@ -20,9 +21,9 @@ const SeePost = () => {
 
   return (
     <>
-      <h1>{params.name.split('-')[0]} {params.name.split('-')[1]}'s Post</h1>
-      <h3>{posts[0].title.toUpperCase()}</h3>
-      <fieldset><div>{posts[0].content}</div></fieldset>
+      <HeaderOne>{params.name.split('-')[0].toUpperCase()} {params.name.split('-')[1].toUpperCase()}'S POST</HeaderOne>
+      <Legendbox>TITLE: {posts[0].title.toUpperCase()}</Legendbox>
+      <Fieldbox><div>{posts[0].content}</div></Fieldbox>
       <h6><button onClick={() => nav(`/${firstName}-${lastName}`)}>Back to Home Page</button></h6>
     </>
   )
