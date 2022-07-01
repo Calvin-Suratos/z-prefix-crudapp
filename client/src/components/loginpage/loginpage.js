@@ -29,7 +29,7 @@ const LoginPage = () => {
       })
     }
     
-    fetch('http://localhost:8080/login', init)
+    fetch('https://calvin-blogger-api.herokuapp.com/login', init)
     .then(res => res.json())
     .then(user => {
       if (user.message !== 'Could not retrieve data') {

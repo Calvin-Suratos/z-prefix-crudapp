@@ -31,7 +31,7 @@ const NewPost = () => {
       })
     }
     
-    fetch('http://localhost:8080/newpost', init)
+    fetch('https://calvin-blogger-api.herokuapp.com/newpost', init)
     .then(res => res.json())
     .then(user => nav(`/${user.first_name}-${user.last_name}`))
     .catch(err => console.error(err))

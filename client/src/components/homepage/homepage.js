@@ -16,14 +16,14 @@ const HomePage = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/users/' + params.name.split('-')[0])
+    fetch('https://calvin-blogger-api.herokuapp.com/users/' + params.name.split('-')[0])
     .then(res => res.json())
     .then(data => setResults(data))
     .catch(err => console.error(err))
   }, [params.name])
 
   useEffect(() => {
-    fetch('http://localhost:8080/posts')
+    fetch('https://calvin-blogger-api.herokuapp.com/posts')
     .then(res => res.json())
     .then(data => setPosts(data))
     .catch(err => console.error(err))
@@ -32,7 +32,7 @@ const HomePage = () => {
   const deletePost = (id) => {
     // eslint-disable-next-line no-restricted-globals
     if(confirm('Are you sure you want to delete the post?')){
-    const postURL = 'http://localhost:8080/posts/' + id;
+    const postURL = 'https://calvin-blogger-api.herokuapp.com/posts/' + id;
     const init = {
       method: 'DELETE',
       headers: {

@@ -39,7 +39,7 @@ const CreateAccount = () => {
       })
     }
     
-    fetch('http://localhost:8080/createaccount', init)
+    fetch('https://calvin-blogger-api.herokuapp.com/createaccount', init)
     .then(res => res.json())
     .then(user => {
       console.log(user)
@@ -56,7 +56,7 @@ const CreateAccount = () => {
           <div><Inputbox type="text" placeholder="First Name" onKeyUp={(e) => searchHandlerFirstName(e)}/></div>
           <div><Inputbox type="text" placeholder="Last Name" onKeyUp={(e) => searchHandlerLastName(e)}/></div>
           <div><Inputbox type="text" placeholder="Username" onKeyUp={(e) => searchHandlerUsername(e)}/></div>
-          <div><Inputbox type="text" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
+          <div><Inputbox type="password" placeholder="Password" onKeyUp={(e) => searchHandlerPassword(e)}/></div>
           <div>______________</div>
           <Submitbox onClick={() => createProfile()}>Submit</Submitbox>
         </label>

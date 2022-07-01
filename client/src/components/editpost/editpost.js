@@ -19,7 +19,7 @@ const EditPost = ({post}) => {
       )
     }
 
-    fetch(`http://localhost:8080/posts/${post.id}`, init)
+    fetch(`https://calvin-blogger-api.herokuapp.com/posts/${post.id}`, init)
     .then(res => res.json())
     .then(data => {
       console.log(data);

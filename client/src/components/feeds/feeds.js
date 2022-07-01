@@ -9,14 +9,14 @@ const Feeds = ({name}) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/users')
+    fetch('https://calvin-blogger-api.herokuapp.com/users')
     .then(res => res.json())
     .then(data => setResults(data))
     .catch(err => console.error(err))
   }, [])
 
   useEffect(() => {
-    fetch('http://localhost:8080/posts')
+    fetch('https://calvin-blogger-api.herokuapp.com/posts')
     .then(res => res.json())
     .then(data => setPosts(data))
     .catch(err => console.error(err))

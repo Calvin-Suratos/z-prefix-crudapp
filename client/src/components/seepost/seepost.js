@@ -12,7 +12,7 @@ const SeePost = () => {
   
 
   useEffect(() => {
-    fetch(`http://localhost:8080/posts/${params.post}`)
+    fetch(`https://calvin-blogger-api.herokuapp.com/posts/${params.post}`)
     .then(res => res.json())
     .then(data => setPosts(data))
     .catch(err => console.error(err))
